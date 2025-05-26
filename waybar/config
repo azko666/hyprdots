@@ -1,0 +1,90 @@
+{
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 20,
+    // Choose the order of the modules
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["custom/music"],
+    "modules-right": ["pulseaudio", "backlight", "battery", "network", "clock", "tray", "custom/lock", "custom/power"],
+    "hyprland/workspaces": {
+		"disable-scroll": true,
+        "on-click": "activate",
+        "all-outputs": true,
+        "active-only": false,
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
+        },
+        "format": "{icon}",
+        "format-icons": {
+            "active": "<span font='10'>󰮯</span>",
+            "empty": "<span font='7'></span>",
+            "persistent": "󰊠",
+        },
+    },
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10
+    },
+    "custom/music": {
+        "format": "   {}",
+        "escape": true,
+        "interval": 5,
+        "tooltip": false,
+        "exec": "playerctl metadata --format='{{ title }}'",
+        "on-click": "playerctl play-pause",
+        "max-length": 50
+    },
+    "clock": {
+        "timezone": "America/Bogota",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": " {:%d/%m/%Y}",
+        "format": " {:%H:%M}"
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}",
+        "format-charging": "",
+        "format-plugged": "",
+        "format-alt": "{icon}",
+        "format-icons": ["", "",  "", "", "", "", "", "", "", "", "", ""]
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "",
+        "format-icons": {
+            "default": ["", "", " "]
+        },
+        "on-click": "pavucontrol"
+    },
+    "network": {
+		"tooltip": false,
+		"format-wifi": "<span color='#9ece6a'> </span>",
+		"format-ethernet": "󰈀",
+        "format-disconnected": "<span color='#ff0000'>󰖪 </span>",
+        "interval": 30,
+        "interface": "wlan0",
+        "on-click": "~/.local/share/bin/wifi-menu.sh"
+	},
+    "custom/lock": {
+        "tooltip": false,
+        "on-click": "swaylock",
+        "format": "",
+    },
+    "custom/power": {
+        "tooltip": false,
+        "on-click": "systemctl poweroff",
+        "format": "襤"
+    }
+}
